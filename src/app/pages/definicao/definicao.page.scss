@@ -1,0 +1,48 @@
+.container{
+background-color: lightyellow;
+}
+.titulo{
+    text-align: center;
+    color: yellow;
+}
+.desc{
+    text-align: justify;
+}
+.explicacao{
+    background-color: black;
+    color: #fff;
+    margin-bottom: 2em;
+    padding: 1em;
+    border-bottom: black 1px solid;
+}
+.criterios{
+padding: 1em;
+margin: 0.5em;
+    align-items: center;
+    border: 1px solid black;
+}
+.criterio{
+    font-weight: bold;
+    font-size: 2.25ch;
+    font-family: sans-serif;
+}
+ion-label{
+    text-transform: initial;
+}
+.input{
+    border: 0.5px black solid;
+    width: 50%;
+    margin-bottom: 1em;
+    margin-top: 0.5em;
+    text-align: center;
+}
+ion-list{
+    background-color: lightyellow;
+}
+.btn-submit{
+    background-color: black;
+    color: yellow;
+    border: #fff solid 1px;
+    border-radius: 10px;
+    text-transform: uppercase;
+}

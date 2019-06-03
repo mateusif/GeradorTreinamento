@@ -1,0 +1,75 @@
+<ion-content>
+<div class="container">
+<div class="explicacao">
+  <h3 class="titulo">Defina os criterios para o treinamento:</h3>
+  <p class="desc">
+    Abaixo selecione alguns criterios para que o App possa montar uma rotina de treinamento adequada
+  </p>
+</div>
+<div class="criterios">
+    <ion-label class="criterio">Duração: </ion-label>  
+    <ion-input placeholder="Tempo em minutos" class="input"></ion-input>
+  <ion-list>
+        <ion-radio-group>
+          <ion-list-header>
+              <ion-label class="criterio">Nível:</ion-label>
+          </ion-list-header>
+      
+          <ion-item>
+            <ion-label>Iniciante</ion-label>
+            <ion-radio value="cord"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Intermediário</ion-label>
+            <ion-radio value="duesenberg"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Avançado</ion-label>
+            <ion-radio value="hudson"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <ion-radio-group>
+            <ion-list-header>
+           <ion-label class="criterio">Intensidade:</ion-label>
+            </ion-list-header>
+        
+            <ion-item>
+              <ion-label>Leve</ion-label>
+              <ion-radio value="cord"></ion-radio>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label>Moderado</ion-label>
+              <ion-radio value="duesenberg"></ion-radio>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label>Vigorosa</ion-label>
+              <ion-radio value="hudson"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          <ion-radio-group>
+              <ion-list-header>
+                <ion-label class="criterio">Tipo:</ion-label>
+              </ion-list-header>
+              <ion-item>
+                <ion-label>Aeróbico</ion-label>
+                <ion-radio value="cord"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Anaeróbico</ion-label>
+                <ion-radio value="duesenberg"></ion-radio>
+              </ion-item>
+           </ion-radio-group>
+      </ion-list>
+
+  <!--
+  <label>Nível: </label>
+  <label>Intensidade: </label>
+  <label>Tipo: </label>-->
+</div>
+<ion-button expand="full" color="black" class="btn-submit" (click)="resultados()" > Sumbeter e mostrar planilha </ion-button>
+</div>
+</ion-content>

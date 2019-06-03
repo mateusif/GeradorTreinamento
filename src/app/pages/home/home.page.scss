@@ -1,0 +1,42 @@
+.container{
+    background-color: #000;
+    height: 100%;
+    padding: 1em;
+}
+.titulo{
+    font-family: serif;
+    font-size: 3ch;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 2em;
+}
+.descricao{
+    color: yellow;
+    font-family: cursive;
+    font-size: 2ch;
+    margin-bottom: 2em;
+}
+.titulo-escolha{
+    margin-top: 4em;
+    text-align: center;
+    color: yellow;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 2ch;
+}
+.opcoes{
+    margin-top: 2.5em;
+    border: #fff solid 1px;
+    align-items: center;
+}
+.opcao{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: yellow;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 2ch;
+    border-radius: 10px;
+    border: #fff 1px solid;
+}
