@@ -1,11 +1,59 @@
 <ion-content>
-<div class="container">
-<h1 class="titulo">Bem vindo ao Gerador de Treinamento</h1>
-<p class="descricao">Um aplicativo pensado para facilitar a vida do treinador e aprimorar o atendimento aos alunos.</p>
-<span class="titulo-escolha">Escolha o que você deseja fazer:</span>
-<div class="opcoes">
-  <ion-button expand="full" color="yellow" class="opcao" (click)="openDefinicao()"> Gerar Treinamento </ion-button>
-  <ion-button expand="full" color="yellow" class="opcao" (click)="mostrarExistentes()"> Vizualizar existentes </ion-button>
-</div>
-</div>
+  <ion-list *ngIf="!exercicios.length">
+    <ion-item *ngFor="let item of [0, 1, 2]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let exercicio of exercicios">
+      <ion-item button [routerLink]="['/definicao', exercicio.id]">
+
+        <ion-label>
+          {{ exercicio.nome }}
+          <p>{{ exercicio.modalidade }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteExercicio(exercicio.id)">
+          <ion-icon slot="top" name="trash"></ion-icon>
+          Excluir
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button (click)="logout()" color="danger" expand="block">
+            Sair
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-button routerLink="/definicao" expand="block">
+            Add produto
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
