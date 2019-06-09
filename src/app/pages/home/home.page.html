@@ -1,5 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button>a</ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Treinamentos Salvos</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-list *ngIf="!exercicios.length">
+  <ion-list *ngIf="!movimentos.length">
     <ion-item *ngFor="let item of [0, 1, 2]">
       <ion-avatar slot="start">
         <ion-skeleton-text animated></ion-skeleton-text>
@@ -19,17 +28,17 @@
   </ion-list>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let exercicio of exercicios">
-      <ion-item button [routerLink]="['/definicao', exercicio.id]">
+    <ion-item-sliding *ngFor="let movimento of movimentos">
+      <ion-item button [routerLink]="['/definicao', movimento.id]">
 
         <ion-label>
-          {{ exercicio.nome }}
-          <p>{{ exercicio.modalidade }}</p>
+          {{ movimento.nome }}
+          <p>{{ movimento.modalidade }}</p>
         </ion-label>
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="deleteExercicio(exercicio.id)">
+        <ion-item-option color="danger" (click)="deleteExercicio(movimento.id)">
           <ion-icon slot="top" name="trash"></ion-icon>
           Excluir
         </ion-item-option>
@@ -50,7 +59,12 @@
 
         <ion-col size="6">
           <ion-button routerLink="/definicao" expand="block">
-            Add produto
+            Add Movimento
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button routerLink="/treinamento" expand="block">
+            Criar treino
           </ion-button>
         </ion-col>
       </ion-row>

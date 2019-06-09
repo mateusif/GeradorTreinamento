@@ -4,17 +4,20 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Produto</ion-title>
+    <ion-title>Movimento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-list>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="exercicios.nome" placeholder="Nome"></ion-input>
+      <ion-input type="text" [(ngModel)]="movimento.nome" placeholder="Nome"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="exercicios.modalidade" placeholder="Modalidade"></ion-input>
+      <ion-input type="text" [(ngModel)]="movimento.modalidade" placeholder="Modalidade"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="movimento.nivel" placeholder="Nível"></ion-input>
     </ion-item>
     
     
@@ -23,8 +26,8 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button (click)="saveExercicios()" expand="block">
-      Salvar Exercicio
+    <ion-button (click)="saveMovimento()" expand="block">
+      Salvar Movimento
     </ion-button>
   </ion-toolbar>
 </ion-footer>

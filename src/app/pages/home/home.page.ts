@@ -1,10 +1,9 @@
-import { Exercicios } from './../../interfaces/exercicios';
-import { PlanilhaPage } from './../planilha/planilha.page';
+import { Movimentos } from '../../interfaces/movimentos';
 import { DefinicaoPage } from './../definicao/definicao.page';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController} from '@ionic/angular';
-import { ExerciciosService } from 'src/app/services/exercicios.service';
+import { MovimentoService } from 'src/app/services/movimento.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 
@@ -17,17 +16,17 @@ import { LoadingController, ToastController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
   private loading: any;
-  public exercicios = new Array<Exercicios>();
-  private exerciciosSubscription: Subscription;
+  public movimentos = new Array<Movimentos>();
+  private movimentoSubscription: Subscription;
 
-  constructor(private exerciciosService : ExerciciosService, 
+  constructor(private movimentoService : MovimentoService, 
     public navCtrl:NavController,
     private authService: AuthService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController)
      {
-    this.exerciciosSubscription = this.exerciciosService.getExercicios().subscribe(data =>{
-      this.exercicios = data;
+    this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data =>{
+      this.movimentos = data;
     });
   }
 
@@ -36,7 +35,7 @@ export class HomePage implements OnInit {
 
   ngOnDestroy() {
     //aquele listener do construtor é destruido para evitar problema de memoria ao trocar de pagina
-    this.exerciciosSubscription.unsubscribe();
+    this.movimentoSubscription.unsubscribe();
   }
   public openDefinicao(){
     console.log("VAI ABRIR");
@@ -62,7 +61,7 @@ export class HomePage implements OnInit {
 }
 async deleteExercicio(id: string){
   try {
-    await this.exerciciosService.deleteExercicios(id);
+    await this.movimentoService.deleteMovimento(id);
   } catch (error) {
     this.presentToast('Erro ao tentar deletar');
   }

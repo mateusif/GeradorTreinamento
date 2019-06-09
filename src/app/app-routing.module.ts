@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', canActivate: [LoggedGuard] },
   { path: 'definicao', loadChildren: './pages/definicao/definicao.module#DefinicaoPageModule', canActivate: [AuthGuard] },
   { path: 'definicao/:id', loadChildren: './pages/definicao/definicao.module#DefinicaoPageModule', canActivate: [AuthGuard] },
-  { path: 'planilha', loadChildren: './pages/planilha/planilha.module#PlanilhaPageModule' }
+  { path: 'treinamento', loadChildren: './pages/treinamento/treinamento.module#TreinamentoPageModule', canActivate: [AuthGuard] },
+  { path: 'treinamento/:id', loadChildren: './pages/treinamento/treinamento.module#TreinamentoPageModule', canActivate: [AuthGuard] }
 ];
 
 @NgModule({
