@@ -41,6 +41,7 @@ export class DefinicaoPage implements OnInit {
   loadTreinamento() {
     this.treinamentoSubscription = this.treinamentoService.getTreinamento(this.treinamentoId).subscribe(data => {
       this.treinamento = data;
+      console.log(this.treinamento);
     });
   }
 
