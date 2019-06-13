@@ -1,3 +1,5 @@
+import { TreinamentoService } from './../../services/treinamento.service';
+import { Treinamento } from './../../interfaces/treinamento';
 import { Component, OnInit } from '@angular/core';
 import { MovimentoService } from 'src/app/services/movimento.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,44 +14,44 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./definicao.page.scss'],
 })
 export class DefinicaoPage implements OnInit {
-  private movimentoId: string = null;
-  public movimento: Movimentos = {};
+  private treinamentoId: string = null;
+  public treinamento: Treinamento = {};
   private loading: any;
-  private movimentosSubscription: Subscription;
+  private treinamentoSubscription: Subscription;
 
   constructor(
-    private movimentoService: MovimentoService,
+    private treinamentoService: TreinamentoService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private toastCtrl: ToastController
   ) {
-    this.movimentoId = this.activatedRoute.snapshot.params['id'];
+    this.treinamentoId = this.activatedRoute.snapshot.params['id'];
 
-    if (this.movimentoId) this.loadMovimento();
+    if (this.treinamentoId) this.loadTreinamento();
   }
 
   ngOnInit() { }
 
   ngOnDestroy() {
-    if (this.movimentosSubscription) this.movimentosSubscription.unsubscribe();
+    if (this.treinamentoSubscription) this.treinamentoSubscription.unsubscribe();
   }
 
-  loadMovimento() {
-    this.movimentosSubscription = this.movimentoService.getMovimento(this.movimentoId).subscribe(data => {
-      this.movimento = data;
+  loadTreinamento() {
+    this.treinamentoSubscription = this.treinamentoService.getTreinamento(this.treinamentoId).subscribe(data => {
+      this.treinamento = data;
     });
   }
 
-  async saveMovimento() {
+  async saveTreinamento() {
     await this.presentLoading();
 
     //this.exercicios.userId = this.authService.getAuth().currentUser.uid;
 
-    if (this.movimentoId) {
+    if (this.treinamentoId) {
       try {
-        await this.movimentoService.updateMovimento(this.movimentoId, this.movimento);
+        await this.treinamentoService.updateTreinamento(this.treinamentoId, this.treinamento);
         await this.loading.dismiss();
 
         this.navCtrl.navigateBack('/home');
@@ -61,7 +63,7 @@ export class DefinicaoPage implements OnInit {
       //this.exercicios.createdAt = new Date().getTime();
 
       try {
-        await this.movimentoService.addMovimento(this.movimento);
+        await this.treinamentoService.addTreinamento(this.treinamento);
         await this.loading.dismiss();
 
         this.navCtrl.navigateBack('/home');
@@ -70,6 +72,9 @@ export class DefinicaoPage implements OnInit {
         this.loading.dismiss();
       }
     }
+  }
+  deleteTreinamento(id:string){
+console.log("Ai")
   }
 
   async presentLoading() {

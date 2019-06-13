@@ -1,3 +1,4 @@
+import { Treinamento } from './../../interfaces/treinamento';
 import { Movimentos } from '../../interfaces/movimentos';
 import { DefinicaoPage } from './../definicao/definicao.page';
 import { Subscription } from 'rxjs';
@@ -6,6 +7,7 @@ import { NavController} from '@ionic/angular';
 import { MovimentoService } from 'src/app/services/movimento.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { TreinamentoService } from 'src/app/services/treinamento.service';
 
 
 
@@ -16,17 +18,17 @@ import { LoadingController, ToastController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
   private loading: any;
-  public movimentos = new Array<Movimentos>();
-  private movimentoSubscription: Subscription;
+  public treinamentos = new Array<Treinamento>();
+  private treinamentoSubscription: Subscription;
 
-  constructor(private movimentoService : MovimentoService, 
+  constructor(private treinamentoService : TreinamentoService, 
     public navCtrl:NavController,
     private authService: AuthService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController)
      {
-    this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data =>{
-      this.movimentos = data;
+    this.treinamentoSubscription = this.treinamentoService.getTreinamentos().subscribe(data =>{
+      this.treinamentos = data;
     });
   }
 
@@ -35,7 +37,7 @@ export class HomePage implements OnInit {
 
   ngOnDestroy() {
     //aquele listener do construtor é destruido para evitar problema de memoria ao trocar de pagina
-    this.movimentoSubscription.unsubscribe();
+    this.treinamentoSubscription.unsubscribe();
   }
   public openDefinicao(){
     console.log("VAI ABRIR");
@@ -61,7 +63,7 @@ export class HomePage implements OnInit {
 }
 async deleteExercicio(id: string){
   try {
-    await this.movimentoService.deleteMovimento(id);
+    await this.treinamentoService.deleteTreinamento(id);
   } catch (error) {
     this.presentToast('Erro ao tentar deletar');
   }

@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class TreinamentoPage implements OnInit {
   private treinamentoId: string = null;
-  public treinamento: Treinamento = {};
+  public treinamentos: Treinamento = {};
   private loading: any;
   private treinamentosSubscription: Subscription;
 
@@ -39,18 +39,18 @@ export class TreinamentoPage implements OnInit {
 
   loadTreinamento() {
     this.treinamentosSubscription = this.treinamentoService.getTreinamento(this.treinamentoId).subscribe(data => {
-      this.treinamento = data;
+      this.treinamentos = data;
     });
   }
 
-  async saveMovimento() {
+  async saveTreinamento() {
     await this.presentLoading();
 
     //this.exercicios.userId = this.authService.getAuth().currentUser.uid;
 
     if (this.treinamentoId) {
       try {
-        await this.treinamentoService.updateTreinamento(this.treinamentoId, this.treinamento);
+        await this.treinamentoService.updateTreinamento(this.treinamentoId, this.treinamentos);
         await this.loading.dismiss();
 
         this.navCtrl.navigateBack('/home');
@@ -62,7 +62,10 @@ export class TreinamentoPage implements OnInit {
       //this.exercicios.createdAt = new Date().getTime();
 
       try {
-        await this.treinamentoService.addTreinamento(this.treinamento);
+        this.treinamentos.nome ="Demonstração";
+        this.treinamentos.movimento = ['Pull Up','Deadlift','Squat','Burpee','Muscle Up'];
+        this.treinamentos.repeticao = ['20','48','100','50','10'];
+        await this.treinamentoService.addTreinamento(this.treinamentos);
         await this.loading.dismiss();
 
         this.navCtrl.navigateBack('/home');
