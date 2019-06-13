@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-list *ngIf="!treinamento.length">
+  <!-- <ion-list *ngIf="!treinamento.length">
     <ion-item *ngFor="let item of [0, 1, 2]">
       <ion-avatar slot="start">
         <ion-skeleton-text animated></ion-skeleton-text>
@@ -26,14 +26,14 @@
         </p>
       </ion-label>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
   <ion-list>
-    <ion-item-sliding *ngFor="let t of treinamento">
+    <ion-item-sliding *ngFor="let t of treinamento.movimento">
       
 
         <ion-label>
-          {{ t.movimento }}
+          {{ t }}
         </ion-label>
       
 
@@ -45,6 +45,24 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+  <ion-list>
+    <ion-item-sliding *ngFor="let t of treinamento.repeticao">
+      
+
+        <ion-label>
+          {{ t }}
+        </ion-label>
+      
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteTreinamento(treinamento.id)">
+          <ion-icon slot="top" name="trash"></ion-icon>
+          Excluir
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
 </ion-content>
 
 <ion-footer>
