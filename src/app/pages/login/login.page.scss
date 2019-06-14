@@ -6,6 +6,7 @@
     margin: 0 auto;
     z-index: 2;
 
+
     &.top {
         top: 5%;
     }
@@ -19,6 +20,10 @@
     }
 }
 
+// .bg-class{
+//     --background: linear-gradient(197deg, rgba(100,100,100,1) 0%, rgba(63,63,63,1) 13.5%, rgba(29,29,29,1) 33.33%, rgba(0,0,0,1) 100%) !important;
+// }
+
 ion-slides {
     height: 100%;
 
@@ -29,8 +34,8 @@ ion-slides {
         border-radius: 10px;
 
         ion-item {
-            --background: rgba(248, 255, 63, 1);
-            --border-radius: 10px;
+            --background: rgb(153, 153, 153);
+            // --border-radius: 10px;
 
             ion-input {
                 --color: #000;
@@ -45,7 +50,8 @@ ion-slides {
     right: 0;
     bottom: 0;
     height: 45%;
-    background-color: #f6ff00;
+    background-color: #b9bc36;
+    font-family: 'Times New Roman', Times, serif;
 
     .waves {
         position: absolute;
@@ -58,8 +64,8 @@ ion-slides {
         transition: all 0.5s;
     }
 }
-.ion-margin-top{
-    background-color: yellow;
-    color: #000;
-    text-transform: uppercase;
-}
+// .ion-margin-top{
+//     background-color: yellow;
+//     color: #000;
+//     // text-transform: uppercase;
+// }
