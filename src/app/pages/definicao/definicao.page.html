@@ -46,10 +46,6 @@
         <ion-col style="background-color: white" size>
           <ion-item-sliding *ngFor="let t of treinamento.movimento">
             <ion-item>{{ t }}</ion-item>
-            <!-- 
-                <ion-label>
-                  {{ t }}
-                </ion-label> -->
             <ion-item-options side="end">
               <ion-item-option color="danger" (click)="deleteTreinamento(treinamento.id)">
                 <ion-icon slot="top" name="trash"></ion-icon>
@@ -61,13 +57,7 @@
 
         <ion-col style="background-color: white" size>
           <ion-item-sliding *ngFor="let t of treinamento.repeticao">
-
             <ion-item>{{ t }}</ion-item>
-
-            <!-- <ion-label>
-                {{ t }}
-              </ion-label> -->
-
             <ion-item-options side="end">
               <ion-item-option color="danger" (click)="deleteTreinamento(treinamento.id)">
                 <ion-icon slot="top" name="trash"></ion-icon>
