@@ -55,7 +55,6 @@ export class LoginPage implements OnInit {
   }
 
   async register() {
-    await this.presentLoading();
 
     // const { password, passwordv } = this
     // if (password != passwordv) {
@@ -63,9 +62,15 @@ export class LoginPage implements OnInit {
     //   return console.log("Senhas nao batem")
     // }
 
+    if (this.userRegister.password != this.userRegister.passwordv) {
+      this.showAlert("Erro!", "Senhas nao batem")
+      return console.log("Senhas nao batem")
+    }
+
     try {
       await this.authService.register(this.userRegister);
       this.showAlert("Sucesso!", "Bem-vido")
+      await this.presentLoading();
     } catch (error) {
       let message: string;
       switch (error.code) {
