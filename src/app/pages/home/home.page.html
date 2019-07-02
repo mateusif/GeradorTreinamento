@@ -1,10 +1,12 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <!-- <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons> -->
 
-    <ion-title>Treinamentos Salvos</ion-title>
+    <ion-title>
+      Treinamentos Salvos
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -52,7 +54,7 @@
       <ion-row>
 
         <ion-col size="6">
-          <ion-button routerLink="/treinamento" expand="block">
+          <ion-button color="dark" routerLink="/treinamento" expand="block">
             Criar treino
           </ion-button>
         </ion-col>
@@ -64,7 +66,7 @@
         </ion-col> -->
 
         <ion-col size="6">
-          <ion-button (click)="logout()" color="danger" expand="block">
+          <ion-button (click)="logout()" color="dark" expand="block">
             Sair
           </ion-button>
         </ion-col>

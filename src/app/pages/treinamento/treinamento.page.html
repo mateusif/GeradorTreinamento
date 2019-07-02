@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -9,67 +9,67 @@
 </ion-header>
 
 <ion-content>
-<ion-list>
-  <ion-radio-group required>
-    <ion-list-header>
-      <ion-label>Nível</ion-label>
-    </ion-list-header>
+  <ion-list>
+    <ion-radio-group required>
+      <ion-list-header>
+        <ion-label>Nível</ion-label>
+      </ion-list-header>
 
-    <ion-item>
-      <ion-label>Iniciante</ion-label>
-      <ion-radio slot="start" value="iniciante" checked></ion-radio>
-    </ion-item>
+      <ion-item>
+        <ion-label>Iniciante</ion-label>
+        <ion-radio slot="start" value="iniciante" checked></ion-radio>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Intermediário</ion-label>
-      <ion-radio slot="start" value="intermediario"></ion-radio>
-    </ion-item>
+      <ion-item>
+        <ion-label>Intermediário</ion-label>
+        <ion-radio slot="start" value="intermediario"></ion-radio>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Avançado</ion-label>
-      <ion-radio slot="start" value="avancado"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
+      <ion-item>
+        <ion-label>Avançado</ion-label>
+        <ion-radio slot="start" value="avancado"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
 
-  <ion-radio-group>
-    <ion-list-header>
-      <ion-label>Intensidade</ion-label>
-    </ion-list-header>
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-label>Intensidade</ion-label>
+      </ion-list-header>
 
-    <ion-item>
-      <ion-label>Leve</ion-label>
-      <ion-radio slot="start" value="leve"></ion-radio>
-    </ion-item>
+      <ion-item>
+        <ion-label>Leve</ion-label>
+        <ion-radio slot="start" value="leve"></ion-radio>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Moderada</ion-label>
-      <ion-radio slot="start" value="moderada"></ion-radio>
-    </ion-item>
+      <ion-item>
+        <ion-label>Moderada</ion-label>
+        <ion-radio slot="start" value="moderada"></ion-radio>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Vigorosa</ion-label>
-      <ion-radio slot="start" value="vigorosa"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
+      <ion-item>
+        <ion-label>Vigorosa</ion-label>
+        <ion-radio slot="start" value="vigorosa"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
 
-  <ion-radio-group>
-    <ion-list-header>
-      <ion-label>Tipo</ion-label>
-    </ion-list-header>
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-label>Tipo</ion-label>
+      </ion-list-header>
 
-    <ion-item>
-      <ion-label>Aeróbico</ion-label>
-      <ion-radio slot="start" value="aerobico" checked></ion-radio>
-    </ion-item>
+      <ion-item>
+        <ion-label>Aeróbico</ion-label>
+        <ion-radio slot="start" value="aerobico" checked></ion-radio>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Anaeróbico</ion-label>
-      <ion-radio slot="start" value="anaerobico"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
-<ion-button (click)="saveTreinamento()" expand="block">
-  Gerar
-</ion-button>
+      <ion-item>
+        <ion-label>Anaeróbico</ion-label>
+        <ion-radio slot="start" value="anaerobico"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-button (click)="saveTreinamento()" expand="block">
+    Gerar
+  </ion-button>
 
 </ion-content>

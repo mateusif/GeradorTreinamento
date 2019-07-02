@@ -1,4 +1,4 @@
-<ion-content class="bg-class" class="swiper-no-swiping">
+<ion-content class="swiper-no-swiping">
   <div class="container top" [hidden]="keyboard.isVisible">
 
     <ion-segment (ionChange)="segmentChanged($event)" mode="ios" value="login">
@@ -10,6 +10,7 @@
       </ion-segment-button>
     </ion-segment>
   </div>
+
 
   <ion-slides>
     <ion-slide>
@@ -24,7 +25,7 @@
           <ion-input type="password" placeholder="Senha" [(ngModel)]="userLogin.password"></ion-input>
         </ion-item>
 
-        <ion-button class="ion-margin-top" (click)="login()" color="light" expand="block">
+        <ion-button class="ion-margin-top" (click)="login()" color="medium" expand="block">
           Entrar
         </ion-button>
       </div>
@@ -46,18 +47,18 @@
           <ion-input type="password" placeholder="Senha Verificacao" [(ngModel)]="userRegister.passwordv"></ion-input>
         </ion-item>
 
-        <ion-button class="ion-margin-top" (click)="register()" color="light" expand="block">
+        <ion-button class="ion-margin-top" (click)="register()" color="medium" expand="block">
           Cadastrar
         </ion-button>
       </div>
     </ion-slide>
   </ion-slides>
 
-  <div class="ocean">
+  <!-- <div class="ocean">
     <div class="waves" [ngStyle]="{'background-position-x': wavesPosition + 'px'}"></div>
 
     <div class="container bottom ion-text-center" [hidden]="keyboard.isVisible">
       <span> <b>O aplicativo perfeito para o gerenciamento de Treinamento! </b></span>
     </div>
-  </div>
+  </div> -->
 </ion-content>
