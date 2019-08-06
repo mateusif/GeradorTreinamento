@@ -44,6 +44,7 @@ export class TreinamentoPage implements OnInit {
   }
 
   async saveTreinamento() {
+    ///AQUI VAI A CADEIA DE IF PARA TESTAR OQ FOI SELECIONADO NO FORM
     await this.presentLoading();
 
     //this.exercicios.userId = this.authService.getAuth().currentUser.uid;

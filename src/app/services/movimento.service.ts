@@ -1,4 +1,4 @@
-import { Movimentos } from '../interfaces/movimentos';
+import { Movimentos } from './../interfaces/movimentos';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import {map} from 'rxjs/operators'
@@ -24,8 +24,8 @@ getMovimentos(){
     })
   );
 }
-addMovimento(movimentos: Movimentos){
-  return this.movimentosCollection.add(movimentos);
+addMovimentos(movimento: Movimentos){
+  return this.movimentosCollection.add(movimento);
 }
 getMovimento(id: string) {
   return this.movimentosCollection.doc<Movimentos>(id).valueChanges();  
@@ -34,8 +34,8 @@ getMovimento(id: string) {
 getMovimentoById(id: string){
 
 }
-updateMovimento(id: string, movimento:Movimentos){
-  return this.movimentosCollection.doc<Movimentos>(id).update(movimento);
+updateMovimento(id: string, treinamento:Movimentos){
+  return this.movimentosCollection.doc<Movimentos>(id).update(treinamento);
 }
 deleteMovimento(id: string){
   return this.movimentosCollection.doc(id).delete();
