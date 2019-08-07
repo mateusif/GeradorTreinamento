@@ -7,6 +7,8 @@ import { Movimentos} from 'src/app/interfaces/movimentos';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
+import { LevantamentoService } from 'src/app/services/levantamento.service';
+import { AerobicosService } from 'src/app/services/aerobicos.service';
 
 @Component({
   selector: 'app-details',
@@ -18,14 +20,19 @@ export class DefinicaoPage implements OnInit {
   private movimentoId: string = null;
   public treinamento: Treinamento = {};
   public movimento: Movimentos = {};
+  public aerobicos: Movimentos = {};
+  public levantamentos: Movimentos = {};
   private loading: any;
   private treinamentoSubscription: Subscription;
   private movimentoSubscription: Subscription;
-
+  private levantamentoSubscription: Subscription
+  private aerobicoSubscription: Subscription;
 
   constructor(
     private treinamentoService: TreinamentoService,
     private movimentoService: MovimentoService,
+    private aerobicoService: AerobicosService,
+    private levantamentoService: LevantamentoService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
@@ -49,9 +56,19 @@ export class DefinicaoPage implements OnInit {
       
       this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data => {
       this.movimento = data;
-      
       console.log(this.movimento);
     });
+      
+      this.levantamentoSubscription = this.levantamentoService.getLevantamentos().subscribe(data => {
+      this.levantamentos = data;
+      console.log(this.levantamentos);
+    });
+    this.aerobicoSubscription = this.aerobicoService.getAerobicos().subscribe(data => {
+      this.aerobicos = data;
+      console.log(this.aerobicos);
+    });
+    
+      
   }
 
   async saveTreinamento() {

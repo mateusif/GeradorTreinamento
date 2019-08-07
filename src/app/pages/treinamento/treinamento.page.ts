@@ -6,6 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
+import { Movimentos } from 'src/app/interfaces/movimentos';
+import { MovimentoService } from 'src/app/services/movimento.service';
+import { AerobicosService } from 'src/app/services/aerobicos.service';
+import { LevantamentoService } from 'src/app/services/levantamento.service';
 
 @Component({
   selector: 'app-details',
@@ -15,11 +19,21 @@ import { Subscription } from 'rxjs';
 export class TreinamentoPage implements OnInit {
   private treinamentoId: string = null;
   public treinamentos: Treinamento = {};
+  public treinamento: Treinamento = {};
+  public movimento: Movimentos = {};
+  public aerobicos: Movimentos = {};
+  public levantamentos: Movimentos = {};
   private loading: any;
   private treinamentosSubscription: Subscription;
+  private movimentoSubscription: Subscription;
+  private levantamentoSubscription: Subscription
+  private aerobicoSubscription: Subscription;
 
   constructor(
     private treinamentoService: TreinamentoService,
+    private movimentoService: MovimentoService,
+    private aerobicoService: AerobicosService,
+    private levantamentoService: LevantamentoService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
@@ -41,10 +55,32 @@ export class TreinamentoPage implements OnInit {
     this.treinamentosSubscription = this.treinamentoService.getTreinamento(this.treinamentoId).subscribe(data => {
       this.treinamentos = data;
     });
+    
   }
 
   async saveTreinamento() {
     ///AQUI VAI A CADEIA DE IF PARA TESTAR OQ FOI SELECIONADO NO FORM
+    //Dar console.log() aqui do que é selecionado no form
+
+
+    //mostra tudo que tem no banco, todos exercicios de todas as modalidades
+      this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data => {
+      this.movimento = data;
+      console.log(this.movimento);
+    });
+
+      this.levantamentoSubscription = this.levantamentoService.getLevantamentos().subscribe(data => {
+      this.levantamentos = data;
+      console.log(this.levantamentos);
+    });
+
+      this.aerobicoSubscription = this.aerobicoService.getAerobicos().subscribe(data => {
+      this.aerobicos = data;
+      console.log(this.aerobicos);
+    });
+
+
+
     await this.presentLoading();
 
     //this.exercicios.userId = this.authService.getAuth().currentUser.uid;
