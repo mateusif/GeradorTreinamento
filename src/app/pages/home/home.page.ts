@@ -3,7 +3,7 @@ import { Movimentos } from '../../interfaces/movimentos';
 import { DefinicaoPage } from './../definicao/definicao.page';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController} from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { MovimentoService } from 'src/app/services/movimento.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingController, ToastController } from '@ionic/angular';
@@ -21,13 +21,12 @@ export class HomePage implements OnInit {
   public treinamentos = new Array<Treinamento>();
   private treinamentoSubscription: Subscription;
 
-  constructor(private treinamentoService : TreinamentoService, 
-    public navCtrl:NavController,
+  constructor(private treinamentoService: TreinamentoService,
+    public navCtrl: NavController,
     private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController)
-     {
-    this.treinamentoSubscription = this.treinamentoService.getTreinamentos().subscribe(data =>{
+    private toastCtrl: ToastController) {
+    this.treinamentoSubscription = this.treinamentoService.getTreinamentos().subscribe(data => {
       this.treinamentos = data;
     });
   }
@@ -39,41 +38,41 @@ export class HomePage implements OnInit {
     //aquele listener do construtor é destruido para evitar problema de memoria ao trocar de pagina
     this.treinamentoSubscription.unsubscribe();
   }
-  public openDefinicao(){
+  public openDefinicao() {
     console.log("VAI ABRIR");
     this.navCtrl.navigateForward("/definicao");
   }
-  public mostrarExistentes(){
+  public mostrarExistentes() {
     console.log("VAI ABRIR");
     this.navCtrl.navigateForward("/planilha");
   }
 
 
 
-  async logout(){
-  await this.presentLoading();
+  async logout() {
+    await this.presentLoading();
 
-  try {
-    await this.authService.logout();
-  } catch (error) {
-    console.error(error);
-  } finally {
-    this.loading.dismiss();
+    try {
+      await this.authService.logout();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.loading.dismiss();
+    }
   }
-}
-async deleteExercicio(id: string){
-  try {
-    await this.treinamentoService.deleteTreinamento(id);
-  } catch (error) {
-    this.presentToast('Erro ao tentar deletar');
+  async deleteExercicio(id: string) {
+    try {
+      await this.treinamentoService.deleteTreinamento(id);
+    } catch (error) {
+      this.presentToast('Erro ao tentar deletar');
+    }
   }
-}
-async presentLoading() {
-  this.loading = await this.loadingCtrl.create({ message: 'Aguarde...' });
-  return this.loading.present();
-}
-async presentToast(message: string) {
-  const toast = await this.toastCtrl.create({ message, duration: 2000 });
-  toast.present();
-}
+  async presentLoading() {
+    this.loading = await this.loadingCtrl.create({ message: 'Aguarde...' });
+    return this.loading.present();
+  }
+  async presentToast(message: string) {
+    const toast = await this.toastCtrl.create({ message, duration: 2000 });
+    toast.present();
+  }
 }

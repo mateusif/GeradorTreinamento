@@ -3,7 +3,7 @@ import { Treinamento } from './../../interfaces/treinamento';
 import { Component, OnInit } from '@angular/core';
 import { MovimentoService } from 'src/app/services/movimento.service';
 import { ActivatedRoute } from '@angular/router';
-import { Movimentos} from 'src/app/interfaces/movimentos';
+import { Movimentos } from 'src/app/interfaces/movimentos';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
@@ -52,23 +52,24 @@ export class DefinicaoPage implements OnInit {
 
   loadTreinamento() {
     this.treinamentoSubscription = this.treinamentoService.getTreinamento(this.treinamentoId).subscribe(data => {
-      this.treinamento = data;});
-      
-      this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data => {
-      this.movimento = data;
+      this.treinamento = data;
+    });
+
+    this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data => {
+      // this.movimento = data;
       console.log(this.movimento);
     });
-      
-      this.levantamentoSubscription = this.levantamentoService.getLevantamentos().subscribe(data => {
-      this.levantamentos = data;
+
+    this.levantamentoSubscription = this.levantamentoService.getLevantamentos().subscribe(data => {
+      // this.levantamentos = data;
       console.log(this.levantamentos);
     });
     this.aerobicoSubscription = this.aerobicoService.getAerobicos().subscribe(data => {
-      this.aerobicos = data;
+      // this.aerobicos = data;
       console.log(this.aerobicos);
     });
-    
-      
+
+
   }
 
   async saveTreinamento() {
@@ -100,8 +101,8 @@ export class DefinicaoPage implements OnInit {
       }
     }
   }
-  deleteTreinamento(id:string){
-console.log("Ai")
+  deleteTreinamento(id: string) {
+    console.log("Ai")
   }
 
   async presentLoading() {

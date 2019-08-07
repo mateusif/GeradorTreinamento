@@ -1,150 +1,153 @@
 <ion-header>
-    <ion-toolbar color="warning">
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-  
-      <ion-title>Definição de critérios</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Definição de critérios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="fGroup">
     <ion-list>
-      <ion-radio-group required>
+      <ion-radio-group formControlName="modal_opcao">
         <ion-list-header>
           <ion-label>Modalidade/Carga</ion-label>
         </ion-list-header>
-  
+
         <ion-item>
           <ion-label>Ginástica</ion-label>
           <ion-checkbox slot="start" value="ginanstica"></ion-checkbox>
         </ion-item>
-  
-        <ion-label>Peso:</ion-label>
+
+        <ion-item>
+          <ion-label>Peso:</ion-label>
+        </ion-item>
         <ion-item>
           <ion-label>Leve</ion-label>
           <ion-radio slot="start" value="leve"></ion-radio>
         </ion-item>
         <ion-item>
-            <ion-label>Médio</ion-label>
-            <ion-radio slot="start" value="medio"></ion-radio>
-          </ion-item>
-    
+          <ion-label>Médio</ion-label>
+          <ion-radio slot="start" value="medio"></ion-radio>
+        </ion-item>
+
         <ion-item>
           <ion-label>Pesado</ion-label>
           <ion-radio slot="start" value="pesado"></ion-radio>
         </ion-item>
 
         <ion-item>
-            <ion-label>Aeróbico</ion-label>
-            <ion-checkbox slot="start" value="aerobico"></ion-checkbox>
+          <ion-label>Aeróbico</ion-label>
+          <ion-checkbox slot="start" value="aerobico"></ion-checkbox>
         </ion-item>
       </ion-radio-group>
-  
-      <ion-radio-group requerido>
+
+      <ion-radio-group formControlName="temp_opcao">
         <ion-list-header>
           <ion-label>Tempo</ion-label>
         </ion-list-header>
-  
+
         <ion-item>
           <ion-label>Diariamente</ion-label>
           <ion-radio slot="start" value="diariamente"></ion-radio>
-       </ion-item>
-        
-       <ion-item>
+        </ion-item>
+
+        <ion-item>
           <ion-label> &lt; 5min</ion-label>
           <ion-radio slot="start" value="five"></ion-radio>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label>5 - 10min</ion-label>
-        <ion-radio slot="start" value="fiveten"></ion-radio>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label>11 - 20min</ion-label>
-        <ion-radio slot="start" value="eleven"></ion-radio>
-      </ion-item>
-    
-      <ion-item>  
-        <ion-label> &gt; 20min</ion-label>
-        <ion-radio slot="start" value="twenty"></ion-radio>
-      </ion-item>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>5 - 10min</ion-label>
+          <ion-radio slot="start" value="fiveten"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>11 - 20min</ion-label>
+          <ion-radio slot="start" value="eleven"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label> &gt; 20min</ion-label>
+          <ion-radio slot="start" value="twenty"></ion-radio>
+        </ion-item>
       </ion-radio-group>
-  
-      <ion-radio-group>
+
+      <ion-radio-group formControlName="repet_opcao">
         <ion-list-header>
           <ion-label>Repetições</ion-label>
         </ion-list-header>
-  
+
         <ion-item>
           <ion-label> &#60; 50 reps</ion-label>
           <ion-radio slot="start" value="cinquenta"></ion-radio>
         </ion-item>
-  
+
         <ion-item>
           <ion-label>50 - 100 reps</ion-label>
           <ion-radio slot="start" value="cem"></ion-radio>
         </ion-item>
 
         <ion-item>
-            <ion-label>&gt;100</ion-label>
-            <ion-radio slot="start" value="cem"></ion-radio>
-          </ion-item>
+          <ion-label>&gt;100</ion-label>
+          <ion-radio slot="start" value="cem"></ion-radio>
+        </ion-item>
       </ion-radio-group>
-    
-      
-      <ion-radio-group>
-          <ion-list-header>
-            <ion-label>Esquema</ion-label>
-          </ion-list-header>
-    
-          <ion-item>
-            <ion-label>Individual </ion-label>
-            <ion-radio slot="start" value="individual"></ion-radio>
-          </ion-item>
-    
-          <ion-item>
-            <ion-label>Dupla</ion-label>
-            <ion-radio slot="start" value="dupla"></ion-radio>
-          </ion-item>
-  
-          <ion-item>
-              <ion-label>Trio</ion-label>
-              <ion-radio slot="start" value="trio"></ion-radio>
-            </ion-item>
-            
-            <ion-item>
-                <ion-label>4 ou +</ion-label>
-                <ion-radio slot="start" value="quatro"></ion-radio>
-              </ion-item>
-        </ion-radio-group>
-    
-        <ion-radio-group>
-            <ion-list-header>
-              <ion-label>Prioridade</ion-label>
-            </ion-list-header>
-      
-            <ion-item>
-              <ion-label>Por tempo </ion-label>
-              <ion-radio slot="start" value="individual"></ion-radio>
-            </ion-item>
-      
-            <ion-item>
-              <ion-label>EMOM</ion-label>
-              <ion-radio slot="start" value="dupla"></ion-radio>
-            </ion-item>
-    
-            <ion-item>
-                <ion-label>AMRAP</ion-label>
-                <ion-radio slot="start" value="trio"></ion-radio>
-              </ion-item>
-          </ion-radio-group>
+
+
+      <ion-radio-group formControlName="esq_opcao">
+        <ion-list-header>
+          <ion-label>Esquema</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>Individual </ion-label>
+          <ion-radio slot="start" value="individual"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Dupla</ion-label>
+          <ion-radio slot="start" value="dupla"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Trio</ion-label>
+          <ion-radio slot="start" value="trio"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>4 ou +</ion-label>
+          <ion-radio slot="start" value="quatro"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+      <ion-radio-group formControlName="prio_opcao">
+        <ion-list-header>
+          <ion-label>Prioridade</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>Por tempo </ion-label>
+          <ion-radio slot="start" value="individual"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>EMOM</ion-label>
+          <ion-radio slot="start" value="dupla"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>AMRAP</ion-label>
+          <ion-radio slot="start" value="trio"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
 
 
     </ion-list>
-    <ion-button (click)="saveTreinamento()" expand="block">
+    <ion-button [disabled]="!fGroup.valid" (click)="saveTreinamento()" expand="block">
       Gerar
     </ion-button>
-  
-  </ion-content>
+  </form>
+</ion-content>

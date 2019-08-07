@@ -14,6 +14,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +25,9 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     StatusBar,
@@ -31,6 +35,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Keyboard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [FormsModule, ReactiveFormsModule]
 })
 export class AppModule { }

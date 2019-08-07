@@ -11,6 +11,8 @@ import { MovimentoService } from 'src/app/services/movimento.service';
 import { AerobicosService } from 'src/app/services/aerobicos.service';
 import { LevantamentoService } from 'src/app/services/levantamento.service';
 
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+
 @Component({
   selector: 'app-details',
   templateUrl: './treinamento.page.html',
@@ -29,6 +31,8 @@ export class TreinamentoPage implements OnInit {
   private levantamentoSubscription: Subscription
   private aerobicoSubscription: Subscription;
 
+  public fGroup: FormGroup;
+
   constructor(
     private treinamentoService: TreinamentoService,
     private movimentoService: MovimentoService,
@@ -38,8 +42,33 @@ export class TreinamentoPage implements OnInit {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private fBuilder: FormBuilder,
   ) {
+    // pagina inteira
+    this.fGroup = this.fBuilder.group({
+      modal_opcao: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      temp_opcao: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      repet_opcao: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      esq_opcao: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+      prio_opcao: [
+        null,
+        Validators.compose([Validators.required])
+      ],
+    })
+
     this.treinamentoId = this.activatedRoute.snapshot.params['id'];
 
     if (this.treinamentoId) this.loadTreinamento();
@@ -55,27 +84,28 @@ export class TreinamentoPage implements OnInit {
     this.treinamentosSubscription = this.treinamentoService.getTreinamento(this.treinamentoId).subscribe(data => {
       this.treinamentos = data;
     });
-    
+
   }
 
   async saveTreinamento() {
     ///AQUI VAI A CADEIA DE IF PARA TESTAR OQ FOI SELECIONADO NO FORM
     //Dar console.log() aqui do que é selecionado no form
+    console.log(this.fGroup.value)
 
 
     //mostra tudo que tem no banco, todos exercicios de todas as modalidades
-      this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data => {
-      this.movimento = data;
+    this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data => {
+      // this.movimento = data;
       console.log(this.movimento);
     });
 
-      this.levantamentoSubscription = this.levantamentoService.getLevantamentos().subscribe(data => {
-      this.levantamentos = data;
+    this.levantamentoSubscription = this.levantamentoService.getLevantamentos().subscribe(data => {
+      // this.levantamentos = data;
       console.log(this.levantamentos);
     });
 
-      this.aerobicoSubscription = this.aerobicoService.getAerobicos().subscribe(data => {
-      this.aerobicos = data;
+    this.aerobicoSubscription = this.aerobicoService.getAerobicos().subscribe(data => {
+      // this.aerobicos = data;
       console.log(this.aerobicos);
     });
 
@@ -99,9 +129,9 @@ export class TreinamentoPage implements OnInit {
       //this.exercicios.createdAt = new Date().getTime();
 
       try {
-        this.treinamentos.nome ="Demonstração";
-        this.treinamentos.movimento = ['Pull Up','Deadlift','Squat','Burpee','Muscle Up'];
-        this.treinamentos.repeticao = ['20','48','100','50','10'];
+        this.treinamentos.nome = "Demonstração";
+        this.treinamentos.movimento = ['Pull Up', 'Deadlift', 'Squat', 'Burpee', 'Muscle Up'];
+        this.treinamentos.repeticao = ['20', '48', '100', '50', '10'];
         await this.treinamentoService.addTreinamento(this.treinamentos);
         await this.loading.dismiss();
 
@@ -118,7 +148,7 @@ export class TreinamentoPage implements OnInit {
     return this.loading.present();
   }
 
-  
+
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
