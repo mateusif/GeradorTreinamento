@@ -1,17 +1,13 @@
+import { MovimentoService } from 'src/app/services/movimento.service';
 import { Treinamento } from './../../interfaces/treinamento';
 import { TreinamentoService } from './../../services/treinamento.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 import { Movimentos } from 'src/app/interfaces/movimentos';
-import { MovimentoService } from 'src/app/services/movimento.service';
-import { AerobicosService } from 'src/app/services/aerobicos.service';
-import { LevantamentoService } from 'src/app/services/levantamento.service';
-
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+
 
 @Component({
   selector: 'app-details',
@@ -21,27 +17,23 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class TreinamentoPage implements OnInit {
   private treinamentoId: string = null;
   public treinamentos: Treinamento = {};
-  public treinamento: Treinamento = {};
+  public movimentos = new Array<Movimentos>();
   public movimento: Movimentos = {};
   public aerobicos: Movimentos = {};
   public levantamentos: Movimentos = {};
   private loading: any;
   private treinamentosSubscription: Subscription;
-  private movimentoSubscription: Subscription;
-  private levantamentoSubscription: Subscription
-  private aerobicoSubscription: Subscription;
+  private movimentosSubscription: Subscription;
 
   public fGroup: FormGroup;
+  private treinamentoSubscription: Subscription;
 
   constructor(
     private treinamentoService: TreinamentoService,
-    private movimentoService: MovimentoService,
-    private aerobicoService: AerobicosService,
-    private levantamentoService: LevantamentoService,
+    private movimentosService: MovimentoService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
-    private authService: AuthService,
     private toastCtrl: ToastController,
     private fBuilder: FormBuilder,
   ) {
@@ -89,28 +81,20 @@ export class TreinamentoPage implements OnInit {
 
   async saveTreinamento() {
     ///AQUI VAI A CADEIA DE IF PARA TESTAR OQ FOI SELECIONADO NO FORM
-    //Dar console.log() aqui do que é selecionado no form
+   /**
+    * if(modalidade == ginastica){
+    *   this.movimentosSubscription = this.movimentosService.getMovimentos().subscribe(data => {
+        this.movimentos = data;   });
+    * trazer a tabela de ginastica pra ca (deve ser parecido como eu coloquei)
+    * }
+    *if(modalidade == peso){
+    * trazer a tabela de peso pra ca (mostrar com console log)
+    * }
+    *if(modalidade == aerobico){
+    * trazer a tabela de exercicios aerobicos pra ca (mostrar com console log)
+    * }    
+    */
     console.log(this.fGroup.value)
-
-
-    //mostra tudo que tem no banco, todos exercicios de todas as modalidades
-    this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data => {
-      // this.movimento = data;
-      console.log(this.movimento);
-    });
-
-    this.levantamentoSubscription = this.levantamentoService.getLevantamentos().subscribe(data => {
-      // this.levantamentos = data;
-      console.log(this.levantamentos);
-    });
-
-    this.aerobicoSubscription = this.aerobicoService.getAerobicos().subscribe(data => {
-      // this.aerobicos = data;
-      console.log(this.aerobicos);
-    });
-
-
-
     await this.presentLoading();
 
     //this.exercicios.userId = this.authService.getAuth().currentUser.uid;
@@ -129,6 +113,7 @@ export class TreinamentoPage implements OnInit {
       //this.exercicios.createdAt = new Date().getTime();
 
       try {
+        //tirar este treinamento estático.
         this.treinamentos.nome = "Demonstração";
         this.treinamentos.movimento = ['Pull Up', 'Deadlift', 'Squat', 'Burpee', 'Muscle Up'];
         this.treinamentos.repeticao = ['20', '48', '100', '50', '10'];

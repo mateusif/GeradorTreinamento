@@ -1,10 +1,7 @@
 import { Treinamento } from './../../interfaces/treinamento';
-import { Movimentos } from '../../interfaces/movimentos';
-import { DefinicaoPage } from './../definicao/definicao.page';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { MovimentoService } from 'src/app/services/movimento.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { TreinamentoService } from 'src/app/services/treinamento.service';
@@ -39,11 +36,9 @@ export class HomePage implements OnInit {
     this.treinamentoSubscription.unsubscribe();
   }
   public openDefinicao() {
-    console.log("VAI ABRIR");
     this.navCtrl.navigateForward("/definicao");
   }
   public mostrarExistentes() {
-    console.log("VAI ABRIR");
     this.navCtrl.navigateForward("/planilha");
   }
 
