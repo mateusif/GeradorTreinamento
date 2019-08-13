@@ -8,6 +8,10 @@ import { Subscription } from 'rxjs';
 import { Movimentos } from 'src/app/interfaces/movimentos';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
+import * as firebase from "firebase/app";
+import "firebase/storage";
+import { AngularFirestore } from "@angular/fire/firestore";
+
 
 @Component({
   selector: 'app-details',
@@ -25,6 +29,10 @@ export class TreinamentoPage implements OnInit {
   private treinamentosSubscription: Subscription;
   private movimentosSubscription: Subscription;
 
+  dados_aerobicos: any
+  dados_levantamento: any
+  dados_movimentos: any
+
   public fGroup: FormGroup;
   private treinamentoSubscription: Subscription;
 
@@ -36,6 +44,7 @@ export class TreinamentoPage implements OnInit {
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private fBuilder: FormBuilder,
+    private firestore: AngularFirestore
   ) {
     // pagina inteira
     this.fGroup = this.fBuilder.group({
@@ -66,7 +75,38 @@ export class TreinamentoPage implements OnInit {
     if (this.treinamentoId) this.loadTreinamento();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.get_dados_aerobicos().subscribe(data => {
+      this.dados_aerobicos = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          nome: e.payload.doc.data()
+        };
+      });
+      console.log("aerobico: ", this.dados_aerobicos);
+    });
+
+    this.get_dados_levantamento().subscribe(data => {
+      this.dados_levantamento = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          nome: e.payload.doc.data()
+        };
+      });
+      console.log("levantamento: ", this.dados_levantamento);
+    });
+
+    this.get_dados_movimentos().subscribe(data => {
+      this.dados_movimentos = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          nome: e.payload.doc.data()
+        };
+      });
+      console.log("movimentos: ", this.dados_movimentos);
+    });
+
+  }
 
   ngOnDestroy() {
     if (this.treinamentosSubscription) this.treinamentosSubscription.unsubscribe();
@@ -81,19 +121,20 @@ export class TreinamentoPage implements OnInit {
 
   async saveTreinamento() {
     ///AQUI VAI A CADEIA DE IF PARA TESTAR OQ FOI SELECIONADO NO FORM
-   /**
-    * if(modalidade == ginastica){
-    *   this.movimentosSubscription = this.movimentosService.getMovimentos().subscribe(data => {
-        this.movimentos = data;   });
-    * trazer a tabela de ginastica pra ca (deve ser parecido como eu coloquei)
-    * }
-    *if(modalidade == peso){
-    * trazer a tabela de peso pra ca (mostrar com console log)
-    * }
-    *if(modalidade == aerobico){
-    * trazer a tabela de exercicios aerobicos pra ca (mostrar com console log)
-    * }    
-    */
+    /**
+     * if(modalidade == ginastica){
+     *   this.movimentosSubscription = this.movimentosService.getMovimentos().subscribe(data => {
+         this.movimentos = data;   });
+     * trazer a tabela de ginastica pra ca (deve ser parecido como eu coloquei)
+     * }
+     *if(modalidade == peso){
+     * trazer a tabela de peso pra ca (mostrar com console log)
+     * }
+     *if(modalidade == aerobico){
+     * trazer a tabela de exercicios aerobicos pra ca (mostrar com console log)
+     * }    
+     */
+
     console.log(this.fGroup.value)
     await this.presentLoading();
 
@@ -138,4 +179,30 @@ export class TreinamentoPage implements OnInit {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
   }
+
+  get_dados_aerobicos() {
+    // let currentUser = firebase.auth().currentUser;
+
+    return this.firestore
+      .collection("aerobicos")
+      .snapshotChanges();
+  }
+
+  get_dados_levantamento() {
+    // let currentUser = firebase.auth().currentUser;
+
+    return this.firestore
+      .collection("levantamento")
+      .snapshotChanges();
+  }
+
+  get_dados_movimentos() {
+    // let currentUser = firebase.auth().currentUser;
+
+    return this.firestore
+      .collection("movimentos")
+      .snapshotChanges();
+  }
+
+
 }
