@@ -24,6 +24,7 @@ export class TreinamentoPage implements OnInit {
   public movimentos = new Array<Movimentos>();
   public movimento: Movimentos = {};
   public aerobicos: Movimentos = {};
+  public tabela_aerobicos: Array<string> = [];
   public levantamentos: Movimentos = {};
   private loading: any;
   private treinamentosSubscription: Subscription;
@@ -32,6 +33,7 @@ export class TreinamentoPage implements OnInit {
   dados_aerobicos: any
   dados_levantamento: any
   dados_movimentos: any
+  modalidade:any
 
   public fGroup: FormGroup;
   private treinamentoSubscription: Subscription;
@@ -76,35 +78,36 @@ export class TreinamentoPage implements OnInit {
   }
 
   ngOnInit() {
-    this.get_dados_aerobicos().subscribe(data => {
+  this.get_dados_aerobicos().subscribe(data => {
       this.dados_aerobicos = data.map(e => {
         return {
-          id: e.payload.doc.id,
+          //id: e.payload.doc.id,
           nome: e.payload.doc.data()
         };
       });
-      console.log("aerobico: ", this.dados_aerobicos);
+      console.log("TABELA DE AEROBICO: ", this.dados_aerobicos);
     });
 
     this.get_dados_levantamento().subscribe(data => {
       this.dados_levantamento = data.map(e => {
         return {
-          id: e.payload.doc.id,
+         // id: e.payload.doc.id,
           nome: e.payload.doc.data()
         };
       });
       console.log("levantamento: ", this.dados_levantamento);
     });
 
-    this.get_dados_movimentos().subscribe(data => {
+    this.modalidade = this.get_dados_movimentos().subscribe(data => {
       this.dados_movimentos = data.map(e => {
         return {
-          id: e.payload.doc.id,
+          //id: e.payload.doc.id,
           nome: e.payload.doc.data()
         };
       });
       console.log("movimentos: ", this.dados_movimentos);
     });
+  
 
   }
 
@@ -120,6 +123,18 @@ export class TreinamentoPage implements OnInit {
   }
 
   async saveTreinamento() {
+    if(this.fGroup.value.modal_opcao == "ginanstica"){
+      console.log("ESCOLHEU GINASTICA");
+      this.treinamentos.movimento = this.dados_movimentos;
+    }
+    else if(this.fGroup.value.modal_opcao == "aerobico"){
+      console.log("ESCOLHEU AEROBICO");
+      this.treinamentos.movimento = this.dados_aerobicos;
+    }
+    else{
+      console.log("ESCOLHEU PESO");
+      this.treinamentos.movimento = this.dados_levantamento;
+    }
     ///AQUI VAI A CADEIA DE IF PARA TESTAR OQ FOI SELECIONADO NO FORM
     /**
      * if(modalidade == ginastica){
@@ -135,7 +150,7 @@ export class TreinamentoPage implements OnInit {
      * }    
      */
 
-    console.log(this.fGroup.value)
+    console.log("é aqui que mostra o que foi escolhido???",this.fGroup.value)
     await this.presentLoading();
 
     //this.exercicios.userId = this.authService.getAuth().currentUser.uid;
@@ -154,10 +169,14 @@ export class TreinamentoPage implements OnInit {
       //this.exercicios.createdAt = new Date().getTime();
 
       try {
-        //tirar este treinamento estático.
-        this.treinamentos.nome = "Demonstração";
-        this.treinamentos.movimento = ['Pull Up', 'Deadlift', 'Squat', 'Burpee', 'Muscle Up'];
-        this.treinamentos.repeticao = ['20', '48', '100', '50', '10'];
+        this.treinamentos.nome = "Teste com form";
+        
+        this.treinamentos.esquema = this.fGroup.value.esq_opcao;
+        this.treinamentos.modalidade = this.fGroup.value.modal_opcao;
+        this.treinamentos.tempo= this.fGroup.value.temp_opcao;
+        this.treinamentos.prioridade = this.fGroup.value.prio_opcao;
+        
+        this.treinamentos.repeticao = this.fGroup.value.repet_opcao
         await this.treinamentoService.addTreinamento(this.treinamentos);
         await this.loading.dismiss();
 
