@@ -8,29 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- <ion-list *ngIf="!treinamento.length">
-    <ion-item *ngFor="let item of [0, 1, 2]">
-      <ion-avatar slot="start">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-      <ion-label>
-        <h3>
-          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-        </h3>
-        <p>
-          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-        </p>
-        <p>
-          <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-list> -->
-
   <ion-list>
-    <!-- <ion-list-header>
-      <ion-label>Movimentos</ion-label>
-    </ion-list-header> -->
     <ion-grid fixed>
       <ion-row>
         <ion-col size-sm>
@@ -53,36 +31,8 @@
             </ion-item-options>
           </ion-item-sliding>
         </ion-col>
-
-        <!-- <ion-col style="background-color: white" size>
-          <ion-item-sliding *ngFor="let t of treinamento.repeticao">
-            <ion-item>{{ t }}</ion-item>
-            <ion-item-options side="end">
-              <ion-item-option color="danger" (click)="deleteTreinamento(treinamento.id)">
-                <ion-icon slot="top" name="trash"></ion-icon>
-                Excluir
-              </ion-item-option>
-            </ion-item-options>
-          </ion-item-sliding>
-        </ion-col> -->
-
       </ion-row>
     </ion-grid>
   </ion-list>
 
-  <ion-list>
-    <!-- <ion-list-header>
-      <ion-label>Repeticoes</ion-label>
-    </ion-list-header> -->
-
-  </ion-list>
-
 </ion-content>
-
-<ion-footer>
-  <!-- <ion-toolbar>
-    <ion-button (click)="saveTreinamento()" expand="block">
-      Salvar Movimento
-    </ion-button>
-  </ion-toolbar> -->
-</ion-footer>

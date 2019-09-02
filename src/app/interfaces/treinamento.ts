@@ -8,5 +8,5 @@ esquema?:string;
 prioridade?:string;
 movimento?:Array<string>;
 repeticao?:string;
-
+criadoPor?: string;
 }

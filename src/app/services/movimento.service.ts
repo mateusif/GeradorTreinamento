@@ -30,10 +30,6 @@ addMovimentos(movimento: Movimentos){
 getMovimento(id: string) {
   return this.movimentosCollection.doc<Movimentos>(id).valueChanges();  
 }
-
-getMovimentoById(id: string){
-
-}
 updateMovimento(id: string, treinamento:Movimentos){
   return this.movimentosCollection.doc<Movimentos>(id).update(treinamento);
 }

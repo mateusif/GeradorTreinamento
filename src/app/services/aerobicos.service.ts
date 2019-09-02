@@ -31,9 +31,6 @@ getAerobico(id: string) {
   return this.aerobicosCollection.doc<Movimentos>(id).valueChanges();  
 }
 
-getMovimentoById(id: string){
-
-}
 updateAerobicos(id: string, aerobico:Movimentos){
   return this.aerobicosCollection.doc<Movimentos>(id).update(aerobico);
 }

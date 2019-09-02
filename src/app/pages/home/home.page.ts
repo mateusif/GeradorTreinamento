@@ -38,12 +38,6 @@ export class HomePage implements OnInit {
   public openDefinicao() {
     this.navCtrl.navigateForward("/definicao");
   }
-  public mostrarExistentes() {
-    this.navCtrl.navigateForward("/planilha");
-  }
-
-
-
   async logout() {
     await this.presentLoading();
 

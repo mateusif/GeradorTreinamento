@@ -7,7 +7,7 @@ import { NavController, LoadingController, ToastController } from '@ionic/angula
 import { Subscription } from 'rxjs';
 import { Movimentos } from 'src/app/interfaces/movimentos';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-
+import { AuthService } from 'src/app/services/auth.service';
 import * as firebase from "firebase/app";
 import "firebase/storage";
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -28,7 +28,7 @@ export class TreinamentoPage implements OnInit {
   public levantamentos: Movimentos = {};
   private loading: any;
   private treinamentosSubscription: Subscription;
-  private movimentosSubscription: Subscription;
+  
 
   dados_aerobicos: any
   dados_levantamento: any
@@ -36,16 +36,16 @@ export class TreinamentoPage implements OnInit {
   modalidade:any
 
   public fGroup: FormGroup;
-  private treinamentoSubscription: Subscription;
+  
 
   constructor(
     private treinamentoService: TreinamentoService,
-    private movimentosService: MovimentoService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private fBuilder: FormBuilder,
+    private authService: AuthService,
     private firestore: AngularFirestore
   ) {
     // pagina inteira
@@ -78,37 +78,34 @@ export class TreinamentoPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log("CRIADO PELA VADIA: ",this.authService.getAuth().currentUser.uid);
+
   this.get_dados_aerobicos().subscribe(data => {
       this.dados_aerobicos = data.map(e => {
         return {
-          //id: e.payload.doc.id,
           nome: e.payload.doc.data()
         };
       });
-      console.log("TABELA DE AEROBICO: ", this.dados_aerobicos);
+     // console.log("TABELA DE AEROBICO: ", this.dados_aerobicos);
     });
 
     this.get_dados_levantamento().subscribe(data => {
       this.dados_levantamento = data.map(e => {
         return {
-         // id: e.payload.doc.id,
           nome: e.payload.doc.data()
         };
       });
-      console.log("levantamento: ", this.dados_levantamento);
+     // console.log("levantamento: ", this.dados_levantamento);
     });
 
     this.modalidade = this.get_dados_movimentos().subscribe(data => {
       this.dados_movimentos = data.map(e => {
         return {
-          //id: e.payload.doc.id,
           nome: e.payload.doc.data()
         };
       });
-      console.log("movimentos: ", this.dados_movimentos);
+      //console.log("movimentos: ", this.dados_movimentos);
     });
-  
-
   }
 
   ngOnDestroy() {
@@ -119,41 +116,22 @@ export class TreinamentoPage implements OnInit {
     this.treinamentosSubscription = this.treinamentoService.getTreinamento(this.treinamentoId).subscribe(data => {
       this.treinamentos = data;
     });
-
   }
 
   async saveTreinamento() {
     if(this.fGroup.value.modal_opcao == "ginanstica"){
-      console.log("ESCOLHEU GINASTICA");
       this.treinamentos.movimento = this.dados_movimentos;
     }
     else if(this.fGroup.value.modal_opcao == "aerobico"){
-      console.log("ESCOLHEU AEROBICO");
       this.treinamentos.movimento = this.dados_aerobicos;
     }
     else{
-      console.log("ESCOLHEU PESO");
       this.treinamentos.movimento = this.dados_levantamento;
     }
-    ///AQUI VAI A CADEIA DE IF PARA TESTAR OQ FOI SELECIONADO NO FORM
-    /**
-     * if(modalidade == ginastica){
-     *   this.movimentosSubscription = this.movimentosService.getMovimentos().subscribe(data => {
-         this.movimentos = data;   });
-     * trazer a tabela de ginastica pra ca (deve ser parecido como eu coloquei)
-     * }
-     *if(modalidade == peso){
-     * trazer a tabela de peso pra ca (mostrar com console log)
-     * }
-     *if(modalidade == aerobico){
-     * trazer a tabela de exercicios aerobicos pra ca (mostrar com console log)
-     * }    
-     */
-
-    console.log("é aqui que mostra o que foi escolhido???",this.fGroup.value)
+//    console.log("é aqui que mostra o que foi escolhido???",this.fGroup.value)
     await this.presentLoading();
 
-    //this.exercicios.userId = this.authService.getAuth().currentUser.uid;
+    
 
     if (this.treinamentoId) {
       try {
@@ -166,17 +144,17 @@ export class TreinamentoPage implements OnInit {
         this.loading.dismiss();
       }
     } else {
-      //this.exercicios.createdAt = new Date().getTime();
-
       try {
+        //console.log("CRIADO PELA VADIA: ",this.authService.getAuth().currentUser.uid);
         this.treinamentos.nome = "Teste com form";
-        
         this.treinamentos.esquema = this.fGroup.value.esq_opcao;
         this.treinamentos.modalidade = this.fGroup.value.modal_opcao;
+        this.treinamentos.criadoPor = this.authService.getAuth().currentUser.uid;
         this.treinamentos.tempo= this.fGroup.value.temp_opcao;
         this.treinamentos.prioridade = this.fGroup.value.prio_opcao;
         
         this.treinamentos.repeticao = this.fGroup.value.repet_opcao
+        
         await this.treinamentoService.addTreinamento(this.treinamentos);
         await this.loading.dismiss();
 
@@ -193,35 +171,26 @@ export class TreinamentoPage implements OnInit {
     return this.loading.present();
   }
 
-
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
   }
 
   get_dados_aerobicos() {
-    // let currentUser = firebase.auth().currentUser;
-
     return this.firestore
       .collection("aerobicos")
       .snapshotChanges();
   }
 
   get_dados_levantamento() {
-    // let currentUser = firebase.auth().currentUser;
-
     return this.firestore
       .collection("levantamento")
       .snapshotChanges();
   }
 
   get_dados_movimentos() {
-    // let currentUser = firebase.auth().currentUser;
-
     return this.firestore
       .collection("movimentos")
       .snapshotChanges();
   }
-
-
 }

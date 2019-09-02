@@ -31,9 +31,6 @@ getLevantamento(id: string) {
   return this.levantamentosCollection.doc<Movimentos>(id).valueChanges();  
 }
 
-getLevantamentoById(id: string){
-
-}
 updateLevantamentos(id: string, levantamento:Movimentos){
   return this.levantamentosCollection.doc<Movimentos>(id).update(levantamento);
 }

@@ -17,29 +17,22 @@ import { AerobicosService } from 'src/app/services/aerobicos.service';
 })
 export class DefinicaoPage implements OnInit {
   private treinamentoId: string = null;
-  private movimentoId: string = null;
   public treinamento: Treinamento = {};
   public movimento: Movimentos = {};
   public aerobicos: Movimentos = {};
   public levantamentos: Movimentos = {};
   private loading: any;
   private treinamentoSubscription: Subscription;
-  private movimentoSubscription: Subscription;
-  private levantamentoSubscription: Subscription
-  private aerobicoSubscription: Subscription;
 
   constructor(
     private treinamentoService: TreinamentoService,
-    private movimentoService: MovimentoService,
-    private aerobicoService: AerobicosService,
-    private levantamentoService: LevantamentoService,
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private toastCtrl: ToastController
   ) {
-    this.treinamentoId = this.activatedRoute.snapshot.params['id'];
+    this.treinamentoId = this.activatedRoute.snapshot.params['id'];//detalhar o treinamento pelo id
 
     if (this.treinamentoId) this.loadTreinamento();
   }
@@ -54,29 +47,10 @@ export class DefinicaoPage implements OnInit {
     this.treinamentoSubscription = this.treinamentoService.getTreinamento(this.treinamentoId).subscribe(data => {
       this.treinamento = data;
     });
-
-    this.movimentoSubscription = this.movimentoService.getMovimentos().subscribe(data => {
-      // this.movimento = data;
-      console.log(this.movimento);
-    });
-
-    this.levantamentoSubscription = this.levantamentoService.getLevantamentos().subscribe(data => {
-      // this.levantamentos = data;
-      console.log(this.levantamentos);
-    });
-    this.aerobicoSubscription = this.aerobicoService.getAerobicos().subscribe(data => {
-      // this.aerobicos = data;
-      console.log(this.aerobicos);
-    });
-
-
   }
 
   async saveTreinamento() {
     await this.presentLoading();
-
-    //this.exercicios.userId = this.authService.getAuth().currentUser.uid;
-
     if (this.treinamentoId) {
       try {
         await this.treinamentoService.updateTreinamento(this.treinamentoId, this.treinamento);
@@ -89,11 +63,10 @@ export class DefinicaoPage implements OnInit {
       }
     } else {
       //this.exercicios.createdAt = new Date().getTime();
-
+      //this.exercicios.userId = this.authService.getAuth().currentUser.uid;
       try {
         await this.treinamentoService.addTreinamento(this.treinamento);
         await this.loading.dismiss();
-
         this.navCtrl.navigateBack('/home');
       } catch (error) {
         this.presentToast('Erro ao tentar salvar');
@@ -101,16 +74,10 @@ export class DefinicaoPage implements OnInit {
       }
     }
   }
-  deleteTreinamento(id: string) {
-    console.log("Ai")
-  }
-
   async presentLoading() {
     this.loading = await this.loadingCtrl.create({ message: 'Aguarde...' });
     return this.loading.present();
   }
-
-
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
     toast.present();
