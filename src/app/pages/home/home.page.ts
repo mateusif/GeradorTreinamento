@@ -24,13 +24,15 @@ export class HomePage implements OnInit {
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
     this.treinamentoSubscription = this.treinamentoService.getTreinamentos().subscribe(data => {
-      this.treinamentos = data;
+      this.treinamentos = data; 
     });
+    
   }
-
+  
   ngOnInit() {
   }
-
+//public usuario:any;
+usuario = this.authService.getAuth().currentUser.uid;
   ngOnDestroy() {
     //aquele listener do construtor é destruido para evitar problema de memoria ao trocar de pagina
     this.treinamentoSubscription.unsubscribe();
