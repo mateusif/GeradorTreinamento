@@ -20,6 +20,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 })
 export class TreinamentoPage implements OnInit {
   private treinamentoId: string = null;
+  public nome: string;
   public treinamentos: Treinamento = {};
   public movimentos = new Array<Movimentos>();
   public movimento: Movimentos = {};
@@ -152,8 +153,8 @@ export class TreinamentoPage implements OnInit {
       }
     } else {
       try {
-        //console.log("CRIADO PELA VADIA: ",this.authService.getAuth().currentUser.uid);
-        this.treinamentos.nome = "Teste com form";
+
+        this.treinamentos.nome = this.nome;
         this.treinamentos.esquema = this.fGroup.value.esq_opcao;
         this.treinamentos.modalidade = this.fGroup.value.modal_opcao;
         this.treinamentos.criadoPor = this.authService.getAuth().currentUser.uid;
