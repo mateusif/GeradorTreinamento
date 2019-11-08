@@ -23,6 +23,7 @@ export class DefinicaoPage implements OnInit {
   public levantamentos: Movimentos = {};
   private loading: any;
   private treinamentoSubscription: Subscription;
+  public mov: Array<Object> = [];
 
   constructor(
     private treinamentoService: TreinamentoService,
@@ -46,6 +47,18 @@ export class DefinicaoPage implements OnInit {
   loadTreinamento() {
     this.treinamentoSubscription = this.treinamentoService.getTreinamento(this.treinamentoId).subscribe(data => {
       this.treinamento = data;
+
+      const {
+        movimento
+      } = this.treinamento
+
+      this.mov = movimento
+      // this.mov = Object.keys(movimento).map(function (resposta) {
+      //   let dados = data[resposta]
+      //   return dados
+      // });
+
+
     });
   }
 

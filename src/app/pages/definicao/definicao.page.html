@@ -8,21 +8,38 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <ion-item>
+    <ion-label>
+      Nome do Treinamento: <strong>{{treinamento.nome}}</strong>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Modalidade: <strong> {{treinamento.modalidade}} </strong>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Tempo: <strong>{{treinamento.tempo}}</strong> min
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Repeticoes: <strong>{{treinamento.repeticao}}</strong>
+    </ion-label>
+  </ion-item>
   <ion-list>
     <ion-grid fixed>
       <ion-row>
-        <ion-col size-sm>
+        <ion-col>
           Movimentos
-        </ion-col>
-        <ion-col size-sm>
-          Repeticoes
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col style="background-color: white" size>
-          <ion-item-sliding *ngFor="let t of treinamento.movimento">
-            <ion-item>{{ t }}</ion-item>
+          <ion-item-sliding *ngFor="let t of mov">
+            <ion-item>{{ t.nome.nome }}</ion-item>
             <ion-item-options side="end">
               <ion-item-option color="danger" (click)="deleteTreinamento(treinamento.id)">
                 <ion-icon slot="top" name="trash"></ion-icon>
