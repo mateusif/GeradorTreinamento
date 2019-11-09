@@ -20,6 +20,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 })
 export class TreinamentoPage implements OnInit {
   private treinamentoId: string = null;
+  public nome: string;
   public treinamentos: Treinamento = {};
   public movimentos = new Array<Movimentos>();
   public movimento: Movimentos = {};
@@ -28,15 +29,15 @@ export class TreinamentoPage implements OnInit {
   public levantamentos: Movimentos = {};
   private loading: any;
   private treinamentosSubscription: Subscription;
-  
+
 
   dados_aerobicos: any
   dados_levantamento: any
   dados_movimentos: any
-  modalidade:any
+  modalidade: any
 
   public fGroup: FormGroup;
-  
+
 
   constructor(
     private treinamentoService: TreinamentoService,
@@ -78,15 +79,15 @@ export class TreinamentoPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log("CRIADO PELA VADIA: ",this.authService.getAuth().currentUser.uid);
+    console.log("CRIADO PELA VADIA: ", this.authService.getAuth().currentUser.uid);
 
-  this.get_dados_aerobicos().subscribe(data => {
+    this.get_dados_aerobicos().subscribe(data => {
       this.dados_aerobicos = data.map(e => {
         return {
           nome: e.payload.doc.data()
         };
       });
-     // console.log("TABELA DE AEROBICO: ", this.dados_aerobicos);
+      // console.log("TABELA DE AEROBICO: ", this.dados_aerobicos);
     });
 
     this.get_dados_levantamento().subscribe(data => {
@@ -95,7 +96,7 @@ export class TreinamentoPage implements OnInit {
           nome: e.payload.doc.data()
         };
       });
-     // console.log("levantamento: ", this.dados_levantamento);
+      // console.log("levantamento: ", this.dados_levantamento);
     });
 
     this.modalidade = this.get_dados_movimentos().subscribe(data => {
@@ -119,19 +120,19 @@ export class TreinamentoPage implements OnInit {
   }
 
   async saveTreinamento() {
-    if(this.fGroup.value.modal_opcao == "ginanstica"){
+    if (this.fGroup.value.modal_opcao == "ginanstica") {
       this.treinamentos.movimento = this.dados_movimentos;
     }
-    else if(this.fGroup.value.modal_opcao == "aerobico"){
+    else if (this.fGroup.value.modal_opcao == "aerobico") {
       this.treinamentos.movimento = this.dados_aerobicos;
     }
-    else{
+    else {
       this.treinamentos.movimento = this.dados_levantamento;
     }
-//    console.log("é aqui que mostra o que foi escolhido???",this.fGroup.value)
+    //    console.log("é aqui que mostra o que foi escolhido???",this.fGroup.value)
     await this.presentLoading();
 
-    
+
 
     if (this.treinamentoId) {
       try {
@@ -146,15 +147,15 @@ export class TreinamentoPage implements OnInit {
     } else {
       try {
         //console.log("CRIADO PELA VADIA: ",this.authService.getAuth().currentUser.uid);
-        this.treinamentos.nome = "Teste com form";
+        this.treinamentos.nome = this.nome;
         this.treinamentos.esquema = this.fGroup.value.esq_opcao;
         this.treinamentos.modalidade = this.fGroup.value.modal_opcao;
         this.treinamentos.criadoPor = this.authService.getAuth().currentUser.uid;
-        this.treinamentos.tempo= this.fGroup.value.temp_opcao;
+        this.treinamentos.tempo = this.fGroup.value.temp_opcao;
         this.treinamentos.prioridade = this.fGroup.value.prio_opcao;
-        
+
         this.treinamentos.repeticao = this.fGroup.value.repet_opcao
-        
+
         await this.treinamentoService.addTreinamento(this.treinamentos);
         await this.loading.dismiss();
 
