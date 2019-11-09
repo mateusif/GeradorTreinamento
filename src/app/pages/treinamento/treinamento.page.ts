@@ -111,7 +111,6 @@ export class TreinamentoPage implements OnInit {
           nome: e.payload.doc.data()
         };
       });
-      //console.log("movimentos: ", this.dados_movimentos);
     });
   }
 
