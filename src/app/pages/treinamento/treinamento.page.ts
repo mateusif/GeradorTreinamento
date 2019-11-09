@@ -53,7 +53,6 @@ export class TreinamentoPage implements OnInit {
     this.fGroup = this.fBuilder.group({
       modal_opcao: [
         null,
-        Validators.compose([Validators.required])
       ],
       temp_opcao: [
         null,
